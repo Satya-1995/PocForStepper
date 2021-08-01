@@ -1,4 +1,4 @@
-package com.example.pocforstepper;
+package com.cropin.poc;
 
 import androidx.appcompat.app.AppCompatActivity;
 

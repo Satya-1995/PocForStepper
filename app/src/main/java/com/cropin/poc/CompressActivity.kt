@@ -1,4 +1,4 @@
-package com.example.pocforstepper
+package com.cropin.poc
 
 
 import android.content.Intent
@@ -24,6 +24,7 @@ import java.text.DecimalFormat
 import java.util.*
 import kotlin.math.log10
 import kotlin.math.pow
+
 
 
 class CompressActivity : AppCompatActivity() {
@@ -91,7 +92,8 @@ class CompressActivity : AppCompatActivity() {
     private fun setCompressedImage() {
         compressedImage?.let {
             compressedImageView.setImageBitmap(BitmapFactory.decodeFile(it.absolutePath))
-            compressedSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
+            compressedSizeTextView.text =
+                String.format("Size : %s", getReadableFileSize(it.length()))
             Toast.makeText(this, "Compressed image save in " + it.path, Toast.LENGTH_LONG).show()
             Log.d("Compressor", "Compressed image save in " + it.path)
         }
@@ -119,7 +121,8 @@ class CompressActivity : AppCompatActivity() {
                         .into(actualImageView);
 
                     //actualImageView.setImageBitmap(loadBitmap(it))
-                    actualSizeTextView.text = String.format("Size : %s", getReadableFileSize(it.length()))
+                    actualSizeTextView.text =
+                        String.format("Size : %s", getReadableFileSize(it.length()))
                     clearImage()
                 }
             } catch (e: IOException) {
