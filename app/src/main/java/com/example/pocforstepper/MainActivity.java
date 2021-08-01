@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         //onclick
         btnNext.setOnClickListener(v -> proceedToStepTwo());
-
         btnPrev.setOnClickListener(v -> backStepOne());
 
     }
