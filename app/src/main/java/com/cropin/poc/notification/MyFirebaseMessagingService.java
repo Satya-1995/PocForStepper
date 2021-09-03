@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import com.cropin.poc.MainActivity;
+import com.cropin.poc.NotificationActivity;
 import com.cropin.poc.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -112,7 +113,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String description = remoteMessage.getNotification().getBody();
         String mediaId = remoteMessage.getData().get("post_id");
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, NotificationActivity.class);
         notificationIntent.putExtra("post_id", mediaId);
         notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);
         notificationIntent.setAction(Intent.ACTION_MAIN);
