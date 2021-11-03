@@ -48,7 +48,6 @@ public class ImageTest extends AppCompatActivity {
             Toast.makeText(this,fileName,Toast.LENGTH_SHORT).show();
         };
 
-
         btnFetchImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
