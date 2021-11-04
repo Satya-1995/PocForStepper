@@ -23,13 +23,13 @@ public final class FileUtil {
         // This class is not publicly instantiable
     }
 
-    interface FileCopyListener{
-        void fileCopyStatus(String fileName);
+    interface FileCopyListener {
+        void fileCopyDone(String name);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static File getOutputMediaFile() throws IOException {
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory("Satyajit"),"testFolder");
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory("Satyajit"), "testFolder");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
         if (!mediaStorageDir.exists()) {
@@ -74,7 +74,7 @@ public final class FileUtil {
         }
     }
 
-    public static void copyDirectoryOneLocationToAnotherLocation(File sourceLocation, File targetLocation,FileCopyListener mListener)
+    public static void copyDirectoryOneLocationToAnotherLocation(File sourceLocation, File targetLocation, FileCopyListener mListener)
             throws IOException {
 
         if (sourceLocation.isDirectory()) {
@@ -85,8 +85,7 @@ public final class FileUtil {
             String[] children = sourceLocation.list();
             for (int i = 0; i < sourceLocation.listFiles().length; i++) {
                 copyDirectoryOneLocationToAnotherLocation(new File(sourceLocation, children[i]),
-                        new File(targetLocation, children[i]),mListener);
-                mListener.fileCopyStatus(children[i].toLowerCase());
+                        new File(targetLocation, children[i]), mListener);
             }
         } else {
 
@@ -106,50 +105,23 @@ public final class FileUtil {
 
     }
 
-//    public static void copy(File sourceLocation, File targetLocation) throws IOException {
-//
-//
-//        if (sourceLocation.isDirectory()) {
-//            if (!targetLocation.exists()) {
-//                targetLocation.mkdir();
-//            }
-//
-//            String[] children = sourceLocation.list();
-//            for (int i = 0; i < sourceLocation.listFiles().length; i++) {
-//                copy(new File(sourceLocation, children[i]),
-//                        new File(targetLocation, children[i]));
-////                mListener.fileCopyStatus(children[i].toLowerCase());
-//            }
-//        } else {
-//
-//
-//            FileInputStream inStream = new FileInputStream(sourceLocation);
-//            FileOutputStream outStream = new FileOutputStream(targetLocation);
-//            FileChannel inChannel = inStream.getChannel();
-//            FileChannel outChannel = outStream.getChannel();
-//            inChannel.transferTo(0, inChannel.size(), outChannel);
-//            inStream.close();
-//            outStream.close();
-//        }
-//    }
 
-    public static void copyFileOrDirectory(String srcDir, String dstDir,FileCopyListener mListener) {
+    public static void copyFileOrDirectory(String srcDir, String dstDir, FileCopyListener mListener) {
 
         try {
             File src = new File(srcDir);
             File dst = new File(dstDir, src.getName());
 
             if (src.isDirectory()) {
-
                 String files[] = src.list();
                 int filesLength = files.length;
                 for (int i = 0; i < filesLength; i++) {
-                    File srcFile=new File(src, files[i]);
+                    File srcFile = new File(src, files[i]);
                     String src1 = srcFile.getPath();
                     String dst1 = dst.getPath();
-                    mListener.fileCopyStatus(srcFile.getName());
-                    copyFileOrDirectory(src1, dst1,mListener);
+                    copyFileOrDirectory(src1, dst1, mListener);
                 }
+                mListener.fileCopyDone(src.getName());
             } else {
                 copyFile(src, dst);
             }
